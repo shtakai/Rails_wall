@@ -1,0 +1,38 @@
+<div class="container"
+<p id="notice"><%= notice %></p>
+
+<!-- navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">The Wall</a>
+    </div>
+  </div>
+</nav>
+<!-- login -->
+<div class="row">
+<div class="col-md-6">
+  <h1>Login</h1>
+  <form action="users/login" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <table>
+      <tr>
+        <td>Email:</td>
+        <td><input type="text" name="user[email]" value=""></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" name="user[password]"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Login"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</div>
+<div class="row">
+<%= link_to 'Register', new_user_path %>
+</div>
+</div>

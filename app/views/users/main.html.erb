@@ -1,0 +1,72 @@
+<div class="container">
+<!-- navbar -->
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">The Wall</a>
+    </div>
+    <div class="navbar-right"><h4><%=@login_user[0].name%></h4><a href='/users/logout'>Logout</a></div>
+</nav>
+<form action="/messages/create" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+	<input name="message[user_id]" type="hidden" value="<%= @login_user[0].id %>">
+
+	  <table>
+	  <tr>
+	    <td>Add a New Message:</td>
+	    <td><input type="text" name="message[text]" value=""></td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td><input type="submit" value="Login"></td>
+	  </tr>
+	</table>
+</form>
+<br>
+<br>
+<br>
+
+
+<% @messages.each do |m| %>
+	<%= m.text %> by: user
+	<br>
+	<form action="/messages/create_comment" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+	<input name="message[user_id]" type="hidden" value="<%= @login_user[0].id %>">
+	<input name="message[message_id]" type="hidden" value="<%= m.id %>">
+
+	  <table class="col-md-offset-1">
+	  <tr>
+	  	<td>
+	  	<% @comments.each do |c|%>
+	  	<% if m.id ==c.message_id %>
+	 
+	  		<%= c.text %> by:<%= c.user.name %><br>
+	  		<%end%>
+	  	<% end %>
+	  </td>
+	  </tr>
+	  <tr>
+	    <td>Add a Comment:</td>
+	    <td><input type="text" name="message[text]" value=""></td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td><input type="submit" value="Login"></td>
+	  </tr>
+	</table>
+</form>
+
+
+
+
+<% end %>
+
+
+<!-- <% @login_user.each do |u|%> -->
+	<!-- <%= u.name%> -->
+<!-- <% end %> -->
+
+
+</div>

@@ -9,13 +9,13 @@ class UsersController < ApplicationController
 
   def main
     # @messages = Message.all
-    @comments = Comment.all
-    @messages = Message.all
+    @comments = Comment.all.reverse
+    @messages = Message.all.reverse
     @login_user = set_user
     if @login_user == []
       redirect_to '/'
     # else
-      
+
     #   puts "/n/n/n/n/n/"
     #   puts @login_user
     end
@@ -27,7 +27,9 @@ class UsersController < ApplicationController
 
   def login
     # @login_user = User.find(email: params[:email])
-    session[:user] = params[:user]
+    @login_user = User.find_by_email params[:user][:email]
+
+    session[:user] = @login_user.id
     # session[:result] = set_user
     redirect_to "/users/main"
   end

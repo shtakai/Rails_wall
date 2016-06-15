@@ -18,7 +18,7 @@
 	  </tr>
 	  <tr>
 	    <td></td>
-	    <td><input type="submit" value="Login"></td>
+	    <td><input type="submit" value="post message"></td>
 	  </tr>
 	</table>
 </form>
@@ -28,7 +28,7 @@
 
 
 <% @messages.each do |m| %>
-	<%= m.text %> by: user
+  <%= m.text %> by: <%= m.user.name %>
 	<br>
 	<form action="/messages/create_comment" method="post">
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
@@ -41,7 +41,7 @@
 	  	<td>
 	  	<% @comments.each do |c|%>
 	  	<% if m.id ==c.message_id %>
-	 
+
 	  		<%= c.text %> by:<%= c.user.name %><br>
 	  		<%end%>
 	  	<% end %>
@@ -53,7 +53,7 @@
 	  </tr>
 	  <tr>
 	    <td></td>
-	    <td><input type="submit" value="Login"></td>
+	    <td><input type="submit" value="post comment"></td>
 	  </tr>
 	</table>
 </form>
